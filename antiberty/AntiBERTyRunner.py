@@ -265,7 +265,7 @@ class AntiBERTyRunner():
             labels = self.tokenizer.encode(
                 " ".join(list(s)),
                 return_tensors="pt",
-            )[:, 1:-1]
+            )[:, 1:-1].to(logits.device)
             nll = torch.nn.functional.cross_entropy(
                 logits,
                 labels,
