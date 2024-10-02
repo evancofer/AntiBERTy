@@ -29,9 +29,12 @@ CHAIN_TO_LABEL = {v: k for k, v in LABEL_TO_CHAIN.items()}
 
 
 class AntiBERTyRunner():
-    def __init__(self):
-        self.device = torch.device(
-            'cuda' if torch.cuda.is_available() else 'cpu')
+    def __init__(self, device=None):
+        if device is None:
+            self.device = torch.device(
+                'cuda' if torch.cuda.is_available() else 'cpu')
+        else:
+            self.device = device
 
         self.model = AntiBERTy.from_pretrained(CHECKPOINT_PATH).to(self.device)
         self.model.eval()
